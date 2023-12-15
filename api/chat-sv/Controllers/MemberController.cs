@@ -37,22 +37,28 @@ namespace TodoApi.Controllers
 
         [HttpPost]
         [Route("members")]
-        public IActionResult CreateTestData([FromBody] MemberBody newData)
+        public ActionResult CreateMember([FromBody] MemberBody newData)
         {
-            if (newData == null)
-            {
-                return BadRequest("Invalid data");
-            }
+            // var members = _merService.AddMember(newData);  // เรียกใช้ GetMembers จาก IMemberService เพื่อดึงข้อมูลผู้ใช้
+            // return Ok(members);  // ส่งข้อมูลกลับในรูปแบบ HTTP 200 OK
 
-            try
-            {
-                // Do something with newData
-                return CreatedAtAction(nameof(CreateTestData), newData);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            return _merService.AddMember(newData);
+        }
+
+        [HttpDelete]
+        [Route("members/{id}")]
+        public ActionResult DeleteMember([FromRoute] MemberParam param)
+        {
+            // เรียกใช้เมธอด DeleteMember จาก IMemberService
+            return _merService.DeleteMember(param);
+        }
+
+        [HttpPut]
+        [Route("members/{id}")]
+        public ActionResult PutMember([FromRoute, FromBody] MemberParam param, MemberBody member)
+        {
+            // เรียกใช้เมธอด DeleteMember จาก IMemberService
+            return _merService.UpdateMember(param, member);
         }
 
     }

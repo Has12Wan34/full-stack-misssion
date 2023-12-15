@@ -10,7 +10,11 @@ namespace TodoApi.Interfaces
         // ส่งคืนรายชื่อสมาชิกตามเงื่อนไขที่กำหนด
         public ActionResult GetMember(MemberParam param);
         public IEnumerable<MemberModels> GetMembers(MemberParam param);
+        public ActionResult AddMember(MemberBody member);
+        public ActionResult DeleteMember(MemberParam param);
+        public ActionResult UpdateMember(MemberParam param, MemberBody member);
     }
-
 }
+
+
 
