@@ -43,7 +43,7 @@ namespace TodoApi.Services
                 // คืนรายการผู้ใช้ที่ผ่านการกรอง
                 return Ok(member);
             }
-            return Ok("Err");
+            return NotFound($"Member with ID {route.Id} not found.");
         }
 
         public ActionResult AddMember([FromBody] MemberBody body)
@@ -56,7 +56,7 @@ namespace TodoApi.Services
 
             try
             {
-                var newmember = new MemberModels { Id = body.Id, Name = body.Name };
+                var newmember = new MemberModels { Id = members.Count + 1, Name = body.Name };
 
                 members.Add(newmember);
 

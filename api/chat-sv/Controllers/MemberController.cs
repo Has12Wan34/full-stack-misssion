@@ -31,16 +31,13 @@ namespace TodoApi.Controllers
         [Route("detail/{id}")]
         public ActionResult GetMember([FromRoute] MemberParam param)  // ประกาศ Method ชื่อ GetMember ที่รับ MemberParam ผ่าน Query String
         {
-            var member = _merService.GetMember(param);  // เรียกใช้ GetMembers จาก IMemberService เพื่อดึงข้อมูลผู้ใช้
-            return Ok(member);  // ส่งข้อมูลกลับในรูปแบบ HTTP 200 OK
+            return _merService.GetMember(param);
         }
 
         [HttpPost]
         [Route("members")]
         public ActionResult CreateMember([FromBody] MemberBody newData)
         {
-            // var members = _merService.AddMember(newData);  // เรียกใช้ GetMembers จาก IMemberService เพื่อดึงข้อมูลผู้ใช้
-            // return Ok(members);  // ส่งข้อมูลกลับในรูปแบบ HTTP 200 OK
 
             return _merService.AddMember(newData);
         }
