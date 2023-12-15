@@ -110,7 +110,6 @@ namespace TodoApi.Services
             try
             {
                 // อัปเดตข้อมูลสมาชิก
-                memberToUpdate.Id = member.Id;
                 memberToUpdate.Name = member.Name;
 
                 return Ok(memberToUpdate);
