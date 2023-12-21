@@ -5,7 +5,7 @@ namespace TodoApi.DTOs
     public class MemberParam 
     {
         [FromRoute(Name="id")]
-        public int? Id {get; set;}
+        public int? MemberId {get; set;}
 
         [FromQuery(Name="name")]
         public string? Name {get; set;}

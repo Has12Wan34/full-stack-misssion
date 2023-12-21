@@ -4,8 +4,8 @@ namespace chat_sv.DTOs.member
 {
     public class MemberBody
     {
-        [JsonProperty("id")]
-        public int Id { get; set; } //? ไม่จำเป็น
+        [JsonProperty("member_id")]
+        public int MemberId { get; set; } //? ไม่จำเป็น
 
         [JsonProperty("name")]
         public string? Name { get; set; }

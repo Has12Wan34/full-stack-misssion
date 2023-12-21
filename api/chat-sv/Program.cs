@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 // เพิ่มบริการ MemberService เข้าไปใน container โดยระบุว่าต้องมีอย่างละตัว (Scoped)
 builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
 
 object value = builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>

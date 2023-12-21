@@ -33,17 +33,16 @@ namespace TodoApi.Services
         public ActionResult GetMember(MemberParam route)
         {
             var members = MemberStore.Members;
-
             // ตรวจสอบว่ามีชื่อที่ไม่ว่างเปล่าหรือไม่
-            if (route.Id != 0 || route.Id != null)
+            if (route.MemberId != 0 || route.MemberId != null)
             {
 
                 // กรองรายการผู้ใช้เฉพาะที่มีชื่อที่ตรงกับที่ระบุ (ไม่สนใจตัวพิมพ์)
-                var member = members.FirstOrDefault(x => x.Id! == route.Id);
+                var member = members.FirstOrDefault(x => x.MemberId! == route.MemberId);
                 // คืนรายการผู้ใช้ที่ผ่านการกรอง
                 return Ok(member);
             }
-            return NotFound($"Member with ID {route.Id} not found.");
+            return NotFound($"Member with ID {route.MemberId} not found.");
         }
 
         public ActionResult AddMember([FromBody] MemberBody body)
@@ -56,7 +55,7 @@ namespace TodoApi.Services
 
             try
             {
-                var newmember = new MemberModels { Id = members.Count + 1, Name = body.Name };
+                var newmember = new MemberModels { MemberId = members.Count + 1, Name = body.Name };
 
                 members.Add(newmember);
 
@@ -73,12 +72,12 @@ namespace TodoApi.Services
             var members = MemberStore.Members;
 
             // ค้นหาสมาชิกที่ต้องการลบตาม ID
-            var memberToDelete = members.FirstOrDefault(x => x.Id == param.Id);
+            var memberToDelete = members.FirstOrDefault(x => x.MemberId == param.MemberId);
 
             if (memberToDelete == null)
             {
                 // ถ้าไม่พบสมาชิกที่ต้องการลบ
-                return NotFound($"Member with ID {param.Id} not found.");
+                return NotFound($"Member with ID {param.MemberId} not found.");
             }
 
             try
@@ -99,12 +98,12 @@ namespace TodoApi.Services
             var members = MemberStore.Members;
 
             // ค้นหาสมาชิกที่ต้องการอัปเดตตาม ID
-            var memberToUpdate = members.FirstOrDefault(x => x.Id == param.Id);
+            var memberToUpdate = members.FirstOrDefault(x => x.MemberId == param.MemberId);
 
             if (memberToUpdate == null)
             {
                 // ถ้าไม่พบสมาชิกที่ต้องการอัปเดต
-                return NotFound($"Member with ID {param.Id} not found.");
+                return NotFound($"Member with ID {param.MemberId} not found.");
             }
 
             try

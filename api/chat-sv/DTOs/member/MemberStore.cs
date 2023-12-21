@@ -10,8 +10,8 @@ namespace chat_sv.DTOs.member
         // กำหนดรายการสมาชิกเริ่มต้น
         private static List<MemberModels> members = new List<MemberModels>
         {
-            new MemberModels { Id = 1, Name = "test_1" },
-            new MemberModels { Id = 2, Name = "test_2" }
+            new MemberModels { MemberId = 1, Name = "Wan" },
+            new MemberModels { MemberId = 2, Name = "Suha" }
         };
 
         // คุณสมบัติสำหรับการเข้าถึงและกำหนดค่ารายการสมาชิก
