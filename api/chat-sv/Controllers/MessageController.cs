@@ -22,6 +22,13 @@ namespace TodoApi.Controllers
         {
             return _message.GetMessagesByMemberId(id);
         }
+
+        [HttpPost]
+        [Route("messages")]
+        public ActionResult CreateMessage([FromBody] MessageBody newData)
+        {
+            return _message.AddMessage(newData);
+        }
     }
 
 }

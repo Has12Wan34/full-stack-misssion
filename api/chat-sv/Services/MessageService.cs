@@ -1,33 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using chat_sv.DTOs.message;
 using TodoApi.Interfaces;
+using chat_sv.DTOs.member;
 
 namespace TodoApi.Services
 {
 
     public class MessageService : ControllerBase, IMessageService
     {
-        private readonly List<MessageModels> _messages;
-
-        public MessageService()
-        {
-
-            _messages = new List<MessageModels>
-        {
-            new MessageModels { MessageId = 1, Content = "Hello", MemberId = 1 },
-            new MessageModels { MessageId = 2, Content = "Hi there", MemberId = 2 },
-            new MessageModels { MessageId = 3, Content = "Greetings", MemberId = 1 }
-        };
-        }
 
         public IEnumerable<MessageModels> GetMessagesByMemberId(int memberId)
         {
-            return _messages.Where(m => m.MemberId == memberId);
+            var messages = MessageStore.Messages;
+            return messages.Where(m => m.MemberId == memberId);
         }
 
         public ActionResult AddMessage([FromBody] MessageBody body)
         {
-            var messages = _messages;
             if (body == null)
             {
                 return BadRequest("Invalid data");
@@ -35,11 +24,20 @@ namespace TodoApi.Services
 
             try
             {
-                var newmessage = new MessageModels { MessageId = messages.Count + 1, Content = body.Content, MemberId = body.MemberId };
+                var messages = MessageStore.Messages;
+                // Create a new message
+                var newMessage = new MessageModels
+                {
+                    MessageId = messages.Count + 1,
+                    Content = body.Content,
+                    MemberId = body.MemberId
+                };
 
-                messages.Add(newmessage);
+                // Add the new message to the list
+                messages.Add(newMessage);
 
-                return StatusCode(201, messages);
+                // Return the updated list of messages
+                return StatusCode(201, messages.Where(x => x.MemberId == body.MemberId));
             }
             catch (Exception)
             {

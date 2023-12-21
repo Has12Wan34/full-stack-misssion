@@ -6,7 +6,6 @@ namespace TodoApi.Interfaces
     public interface IMessageService
     {
         IEnumerable<MessageModels> GetMessagesByMemberId(int memberId);
-
         public ActionResult AddMessage(MessageBody message);
     }
 }
